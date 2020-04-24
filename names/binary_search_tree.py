@@ -42,11 +42,35 @@ class BinarySearchTree:
     # EXTERNAL
     ########################################
 
-    def __init__(self, value, left=None, right=None):
+    def __init__(
+        self,
+        value,
+        from_list=False,
+        on_eq=None,
+        on_lt=None,
+        on_gt=None,
+        on_else=None,
+    ):
 
-        self.value = value
-        self.left = left
-        self.right = right
+        self.left = None
+        self.right = None
+
+        if from_list:
+
+            kwargs = dict(
+                on_eq=on_eq,
+                on_lt=on_lt,
+                on_gt=on_gt,
+                on_else=on_else,
+            )
+
+            self.value = value[0]
+            for v in value[1:]:
+                self.insert(v, **kwargs)
+
+        else:
+
+            self.value = value
 
         return
 
