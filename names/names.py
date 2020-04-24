@@ -10,11 +10,16 @@ with open('names_2.txt', 'r') as file:
 
 duplicates = []    # Return the list of duplicates in this data structure
 
+
+def handle_duplicate(value, *rest):
+    duplicates.append(value)
+
+
 # Replace the nested for loops below with your improvements
 for name_1 in names_1_list:
     for name_2 in names_2_list:
         if name_1 == name_2:
-            duplicates.append(name_1)
+            handle_duplicate(name_1)
 
 end_time = time.time()
 print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
