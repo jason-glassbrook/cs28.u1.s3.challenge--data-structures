@@ -109,18 +109,49 @@ class BinarySearchTree:
 
         return
 
-    def contains(self, target_value):
+    def contains(
+        self,
+        target_value,
+        on_eq=None,
+        on_lt=None,
+        on_gt=None,
+        on_else=None,
+    ):
 
-        if target_value == self.value:
+        self_value = self.value
+        kwargs = dict(
+            on_eq=on_eq,
+            on_lt=on_lt,
+            on_gt=on_gt,
+            on_else=on_else,
+        )
+
+        if target_value == self_value:
+
+            if callable(on_eq):
+                on_eq(target_value, self_value)
+
             return True
 
-        elif target_value < self.value and self._has_left_BST():
-            return self.left.contains(target_value)
+        elif target_value < self_value and self._has_left_BST():
 
-        elif target_value > self.value and self._has_right_BST():
-            return self.right.contains(target_value)
+            if callable(on_lt):
+                on_eq(target_value, self_value)
+
+            return self.left.contains(target_value, **kwargs)
+
+        elif target_value > self_value and self._has_right_BST():
+
+            if callable(on_gt):
+                on_eq(target_value, self_value)
+
+            return self.right.contains(target_value, **kwargs)
 
         else:
+
+            if callable(on_else):
+                on_eq(target_value, self_value)
+
             return False
 
     ########################################
