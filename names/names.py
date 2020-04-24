@@ -1,4 +1,5 @@
 import time
+from binary_search_tree import BinarySearchTree
 
 start_time = time.time()
 
@@ -16,6 +17,13 @@ def handle_duplicate(value, *rest):
 
 
 # Replace the nested for loops below with your improvements
+names_1_bst = BinarySearchTree(
+    value_iter=names_1_list,
+    on_eq=handle_duplicate,
+    error_on_eq=False,
+)
+print(len(duplicates))
+
 for name_1 in names_1_list:
     for name_2 in names_2_list:
         if name_1 == name_2:
