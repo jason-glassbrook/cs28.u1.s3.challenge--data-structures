@@ -58,6 +58,8 @@ class BinarySearchTree:
         on_lt=None,
         on_gt=None,
         on_else=None,
+        error_on_eq=True,
+        error_on_else=True,
     ):
 
         self.left = None
@@ -70,6 +72,8 @@ class BinarySearchTree:
                 on_lt=on_lt,
                 on_gt=on_gt,
                 on_else=on_else,
+                error_on_eq=error_on_eq,
+                error_on_else=error_on_else,
             )
 
             self.value = value_iter[0]
@@ -97,6 +101,8 @@ class BinarySearchTree:
         on_lt=None,
         on_gt=None,
         on_else=None,
+        error_on_eq=True,
+        error_on_else=True,
     ):
 
         self_value = self.value
@@ -105,6 +111,8 @@ class BinarySearchTree:
             on_lt=on_lt,
             on_gt=on_gt,
             on_else=on_else,
+            error_on_eq=error_on_eq,
+            error_on_else=error_on_else,
         )
 
         if new_value == self_value:
@@ -112,7 +120,8 @@ class BinarySearchTree:
             if callable(on_eq):
                 on_eq(new_value, self_value)
 
-            raise Exception("DuplicateValueError")
+            if error_on_eq:
+                raise Exception("DuplicateValueError")
 
         elif new_value < self_value:
 
@@ -141,7 +150,8 @@ class BinarySearchTree:
             if callable(on_else):
                 on_else(new_value, self_value)
 
-            raise Exception("NotComparableError")
+            if error_on_else:
+                raise Exception("NotComparableError")
 
         return
 
