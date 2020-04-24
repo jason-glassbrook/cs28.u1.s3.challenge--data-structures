@@ -54,23 +54,58 @@ class BinarySearchTree:
 
         return 1 + self._len_or(self.left) + self._len_or(self.right)
 
-    def insert(self, new_value):
+    def insert(
+        self,
+        new_value,
+        on_eq=None,
+        on_lt=None,
+        on_gt=None,
+        on_else=None,
+    ):
 
-        if new_value < self.value:
+        self_value = self.value
+        kwargs = dict(
+            on_eq=on_eq,
+            on_lt=on_lt,
+            on_gt=on_gt,
+            on_else=on_else,
+        )
+
+        if new_value == self_value:
+
+            if callable(on_eq):
+                on_eq(new_value, self_value)
+
+            raise Exception("DuplicateValueError")
+
+        elif new_value < self_value:
+
+            if callable(on_lt):
+                on_eq(new_value, self_value)
 
             if self._has_left_BST():
-                self.left.insert(new_value)
+                self.left.insert(new_value, **kwargs)
 
             else:
-                self.left = BinarySearchTree(new_value)
+                self.left = BinarySearchTree(new_value, **kwargs)
+
+        elif new_value > self_value:
+
+            if callable(on_gt):
+                on_eq(new_value, self_value)
+
+            if self._has_right_BST():
+                self.right.insert(new_value, **kwargs)
+
+            else:
+                self.right = BinarySearchTree(new_value, **kwargs)
 
         else:
 
-            if self._has_right_BST():
-                self.right.insert(new_value)
+            if callable(on_else):
+                on_eq(new_value, self_value)
 
-            else:
-                self.right = BinarySearchTree(new_value)
+            raise Exception("NotComparableError")
 
         return
 
