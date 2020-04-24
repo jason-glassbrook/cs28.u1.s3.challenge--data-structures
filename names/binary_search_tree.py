@@ -105,7 +105,7 @@ class BinarySearchTree:
         elif new_value < self_value:
 
             if callable(on_lt):
-                on_eq(new_value, self_value)
+                on_lt(new_value, self_value)
 
             if self._has_left_BST():
                 self.left.insert(new_value, **kwargs)
@@ -116,7 +116,7 @@ class BinarySearchTree:
         elif new_value > self_value:
 
             if callable(on_gt):
-                on_eq(new_value, self_value)
+                on_gt(new_value, self_value)
 
             if self._has_right_BST():
                 self.right.insert(new_value, **kwargs)
@@ -127,7 +127,7 @@ class BinarySearchTree:
         else:
 
             if callable(on_else):
-                on_eq(new_value, self_value)
+                on_else(new_value, self_value)
 
             raise Exception("NotComparableError")
 
@@ -160,21 +160,21 @@ class BinarySearchTree:
         elif target_value < self_value and self._has_left_BST():
 
             if callable(on_lt):
-                on_eq(target_value, self_value)
+                on_lt(target_value, self_value)
 
             return self.left.contains(target_value, **kwargs)
 
         elif target_value > self_value and self._has_right_BST():
 
             if callable(on_gt):
-                on_eq(target_value, self_value)
+                on_gt(target_value, self_value)
 
             return self.right.contains(target_value, **kwargs)
 
         else:
 
             if callable(on_else):
-                on_eq(target_value, self_value)
+                on_else(target_value, self_value)
 
             return False
 
