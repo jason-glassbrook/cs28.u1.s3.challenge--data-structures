@@ -2,13 +2,11 @@ import time
 
 start_time = time.time()
 
-f = open('names_1.txt', 'r')
-names_1 = f.read().split("\n")     # List containing 10000 names
-f.close()
+with open('names_1.txt', 'r') as file:
+    names_1 = file.read().split("\n")  # List containing 10000 names
 
-f = open('names_2.txt', 'r')
-names_2 = f.read().split("\n")     # List containing 10000 names
-f.close()
+with open('names_2.txt', 'r') as file:
+    names_2 = file.read().split("\n")  # List containing 10000 names
 
 duplicates = []    # Return the list of duplicates in this data structure
 
