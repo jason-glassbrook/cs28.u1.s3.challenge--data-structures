@@ -1,4 +1,5 @@
 class Node:
+
     def __init__(self, value=None, next_node=None):
         # the value at this linked list node
         self.value = value
@@ -17,6 +18,7 @@ class Node:
 
 
 class LinkedList:
+
     def __init__(self):
         # reference to the head of the list
         self.head = None

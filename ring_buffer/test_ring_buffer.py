@@ -3,6 +3,7 @@ from ring_buffer import RingBuffer, ArrayRingBuffer
 
 
 class RingBufferTests(unittest.TestCase):
+
     def setUp(self):
         self.buffer = RingBuffer(5)
         self.buffer_2 = RingBuffer(5)
@@ -41,6 +42,7 @@ class RingBufferTests(unittest.TestCase):
 
 
 class ArrayRingBufferTests(unittest.TestCase):
+
     def setUp(self):
         self.buffer = ArrayRingBuffer(5)
         self.buffer_2 = ArrayRingBuffer(5)

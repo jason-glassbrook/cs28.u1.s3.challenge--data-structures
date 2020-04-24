@@ -2,6 +2,7 @@ from doubly_linked_list import DoublyLinkedList
 
 
 class RingBuffer:
+
     def __init__(self, capacity):
         self.capacity = capacity
         self.current = None
@@ -18,10 +19,14 @@ class RingBuffer:
 
         return list_buffer_contents
 
-# ----------------Stretch Goal-------------------
+
+############################################################
+#   STRETCH
+############################################################
 
 
 class ArrayRingBuffer:
+
     def __init__(self, capacity):
         pass
 
