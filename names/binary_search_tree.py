@@ -1,3 +1,11 @@
+from collections.abc import Iterable
+
+
+def iterable(thing):
+
+    return isinstance(thing, Iterable)
+
+
 class BinarySearchTree:
 
     ########################################
@@ -44,8 +52,8 @@ class BinarySearchTree:
 
     def __init__(
         self,
-        value,
-        from_list=False,
+        value=None,
+        value_iter=None,
         on_eq=None,
         on_lt=None,
         on_gt=None,
@@ -55,7 +63,7 @@ class BinarySearchTree:
         self.left = None
         self.right = None
 
-        if from_list:
+        if iterable(value_iter):
 
             kwargs = dict(
                 on_eq=on_eq,
@@ -64,13 +72,17 @@ class BinarySearchTree:
                 on_else=on_else,
             )
 
-            self.value = value[0]
-            for v in value[1:]:
-                self.insert(v, **kwargs)
+            self.value = value_iter[0]
+            for value in value_iter[1:]:
+                self.insert(value, **kwargs)
+
+        elif value is not None:
+
+            self.value = value
 
         else:
 
-            self.value = value
+            raise Exception("ValueError")
 
         return
 
