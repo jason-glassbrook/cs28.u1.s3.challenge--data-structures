@@ -17,19 +17,20 @@ def handle_duplicate(value, *rest):
 
 
 # Replace the nested for loops below with your improvements
+
 names_1_bst = BinarySearchTree(
     value_iter=names_1_list,
     on_eq=handle_duplicate,
     error_on_eq=False,
 )
-print(len(duplicates))
 
-for name_1 in names_1_list:
-    for name_2 in names_2_list:
-        if name_1 == name_2:
-            handle_duplicate(name_1)
+# print(len(duplicates))     # there _are_ duplicates in the first file
+
+for name_2 in names_2_list:
+    names_1_bst.contains(name_2, on_eq=handle_duplicate)
 
 end_time = time.time()
+
 print(f"{len(duplicates)} duplicates:\n\n{', '.join(duplicates)}\n\n")
 print(f"runtime: {end_time - start_time} seconds")
 
